@@ -3,9 +3,10 @@ import subprocess
 import discord
 from dataclasses import dataclass
 import os
+import asyncio
 
 
-BOT_TOKEN = #New BotToken
+BOT_TOKEN = #New BotToken create new bot token from discord dev website and paste here
 CHANNEL_ID = #Copy the channel ID from the wanted Discord and paste into here
 
 bot = commands.Bot(command_prefix = "!", intents = discord.Intents.all())
@@ -66,19 +67,34 @@ async def ValStatus(ctx):
 
 @bot.command()
 async def MinecraftOn(ctx):    
+    await ctx.send("Minecraft server is starting.")
     
-    await ctx.send("Minecraft server is opening...")
-    batch_file_path = r #insert the server directory here''
-        # Start the .jar file using Java
+    # Start the server in a separate thread
+    await asyncio.to_thread(start_minecraft_server)
+
+    await ctx.send("Server has been turned off.")
+
+def start_minecraft_server():
+    batch_file_path = r'insert .jar server start file to start the server '
     process = subprocess.Popen(['java', '-jar', batch_file_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     stdout, stderr = process.communicate()
-    await ctx.send("Server started successfully.")
     print(stdout)
+
+
+# async def MinecraftOn(ctx):    
+#     await ctx.send("Minecraft server is opening...")
+#     batch_file_path = r'C:\Users\16266\Desktop\ \MC 2024\server.jar'
+#         # Start the .jar file using Java
+#     process = subprocess.Popen(['java', '-jar', batch_file_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+#     stdout, stderr = process.communicate()
+#     await ctx.send("Server started successfully.")
+#     print(stdout)
+
 
 @bot.command()
 async def MinecraftOff(ctx):    
     await ctx.send("Minecraft server is off")
-    batch_file_path = r #'C:\Users\16266\Desktop\School\ServerBot\server.jar'
+    batch_file_path = r'insert directory here to check if off'
         # Start the .jar file using Java
     process = subprocess.Popen(['java', '-jar', batch_file_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     stdout, stderr = process.communicate()
@@ -88,7 +104,12 @@ async def MinecraftOff(ctx):
 @bot.command()
 async def MinecraftStatus(ctx):    
     await ctx.send("Minecraft server is ")
-
+def checkFileClosed(file_obj):
+    # check if file is closed using `closed` property
+    if file_obj.closed == True:
+        print("Your file is closed.")
+    else:
+        print("Your file is open.")
 
 
 
