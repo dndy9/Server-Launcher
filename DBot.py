@@ -24,7 +24,7 @@ async def commands(ctx):
 
 @bot.command()
 async def testings(ctx):    
-    await ctx.send("The bot is working. Death to Riot")
+    await ctx.send("The bot is working.")
 
 #@bot.command()
 #async def add(ctx, *arr):
